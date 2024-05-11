@@ -59,7 +59,7 @@ bot.on(message("text"), async (ctx) => {
           role: "model",
           parts: [
             {
-              text: "As a top-performing student renowned for your exceptional note-taking abilities, outline your method for preparing comprehensive and effective study notes for exams. Provide a detailed solution within 300 to 400 words, structured in bullet points with 3 to 4 lines for clarity, covering main topics ,types of topic init and subtopics",
+              text: "As a top-performing student renowned for your exceptional note-taking abilities, outline your method for preparing comprehensive and effective study notes for exams. Provide a detailed and very exaplained solution within 600 words, structured in bullet points with 3 to 4 lines for clarity, covering main topics ,types of topic if exist with full explanation,subtopics ,advantages,disadvantage,example",
             },
           ],
         },
@@ -68,7 +68,7 @@ bot.on(message("text"), async (ctx) => {
         maxOutputTokens: 1000,
       },
     });
-    const msg =
+    const msg = 
       "Generate comprehensive answers for given topics, presented in a structured manner with bullet points. Include types, advantages, disadvantages, and provide illustrative examples for each point, accompanied by detailed explanations";
 
     const result = await chat.sendMessageStream(msg);
@@ -82,10 +82,11 @@ bot.on(message("text"), async (ctx) => {
     }
 
     const response = await result.response;
+
     console.log("Response:", response);
 
     console.log("Full Response:", text);
-    await ctx.reply(text.toString());
+    await ctx.reply(text.replace(/\*/g, ""));
     // For multi-turn conversations (like chat)
     const history = await chat.getHistory();
     const msgContent = { role: "user", parts: [{ text: msg }] };
