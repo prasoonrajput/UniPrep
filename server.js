@@ -30,13 +30,13 @@ bot.start(async (ctx) => {
   );
 });
 
-bot.on((message('text')),async (ctx) => {
+bot.on(message("text"), async (ctx) => {
   //   ctx.reply("Welcome to the UniPrep Bot");
-  const from = await ctx.update.message.from;
-  const message = await ctx.update.message.text;
+  const from = ctx.update.message.from;
+  const message = ctx.update.message.text;
   console.log(from);
   const { message_id: waitingMeassage } = await ctx.reply(
-    `Hey! ${from.first_name}, Kindley wait for a moment.I am curating post for you`
+    `Hey! ${from.first_name}, Kindley wait for a moment.I am curating the Best answer for you`
   );
   const { message_id: stickerwaitingId } = await ctx.replyWithSticker(
     "CAACAgIAAxkBAAIBSWY13Nf0sFlR2LaiLmVPOJemSi7nAAIxAAMNttIZXdKISghjh-80BA"
@@ -51,7 +51,7 @@ bot.on((message('text')),async (ctx) => {
           role: "user",
           parts: [
             {
-              text: `i am giving you topic name for universty subject topic ${message}`,
+              text: `i am giving you universty subject topic ${message}`,
             },
           ],
         },
@@ -59,7 +59,7 @@ bot.on((message('text')),async (ctx) => {
           role: "model",
           parts: [
             {
-              text: "Imagine you're a diligent student who consistently tops your class. You're known for your exceptional note-taking skills, which greatly contribute to your academic success. Describe how you prepare your notes for exams and the strategies you use to ensure they are comprehensive and effective.giving solution to the topic in 250 words to 300 words and in points wise like bullets points for topics and sub topics ",
+              text: "As a top-performing student renowned for your exceptional note-taking abilities, outline your method for preparing comprehensive and effective study notes for exams. Provide a detailed solution within 300 to 400 words, structured in bullet points with 3 to 4 lines for clarity, covering main topics ,types of topic init and subtopics",
             },
           ],
         },
@@ -69,7 +69,7 @@ bot.on((message('text')),async (ctx) => {
       },
     });
     const msg =
-      "Create the answer for the topics in point wise with its types,advantage,disadvantage and example in concise and brief manner";
+      "Generate comprehensive answers for given topics, presented in a structured manner with bullet points. Include types, advantages, disadvantages, and provide illustrative examples for each point, accompanied by detailed explanations";
 
     const result = await chat.sendMessageStream(msg);
     console.log(result);
@@ -85,7 +85,7 @@ bot.on((message('text')),async (ctx) => {
     console.log("Response:", response);
 
     console.log("Full Response:", text);
-    await ctx.reply(text);
+    await ctx.reply(text.toString());
     // For multi-turn conversations (like chat)
     const history = await chat.getHistory();
     const msgContent = { role: "user", parts: [{ text: msg }] };
